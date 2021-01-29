@@ -15,12 +15,12 @@ def get_data(data_set='AAPL', start='2012-01-01', end='2020-9-20'):
 
     # discarding data that may consider noise and creating a new df with Xt - Xt-1 values
     close_df = df['2012-01-01':].reset_index()['Close']
-    plotting(close_df, title="Close price in the last four years",
+    plotting(close_df, title="Close price ",
              x_label="Date", y_label="Price")
 
     close_diff = close_df.diff().dropna()
     # print(close_diff)
-    plotting(close_diff, "close price after data differencing in the last four years", "Date")
+    plotting(close_diff, "close price after data differencing ", "Date")
 
     # splitting the data and getting the number of length to train the model on
     # the training data set contains about 80% of the data.
