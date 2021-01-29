@@ -13,14 +13,14 @@ def get_data(data_set='AAPL', start='2012-01-01', end='2020-9-20'):
     # plotting the data
     plotting(df['Close'], title="Close Price History", x_label='Date', y_label='Close Price US ($)')
 
-    # discarding the non important data and creating a new df with Xt - Xt-1 values
-    close_last_two_years_df = df['2018-01-08':].reset_index()['Close']
-    plotting(close_last_two_years_df, title="Close price in the last two years",
+    # discarding data that may consider noise and creating a new df with Xt - Xt-1 values
+    close_df = df['2012-01-01':].reset_index()['Close']
+    plotting(close_df, title="Close price in the last four years",
              x_label="Date", y_label="Price")
 
-    close_diff = close_last_two_years_df.diff().dropna()
+    close_diff = close_df.diff().dropna()
     # print(close_diff)
-    plotting(close_diff, "close price after data differencing in the last two years", "Date")
+    plotting(close_diff, "close price after data differencing in the last four years", "Date")
 
     # splitting the data and getting the number of length to train the model on
     # the training data set contains about 80% of the data.
@@ -45,7 +45,7 @@ def get_data(data_set='AAPL', start='2012-01-01', end='2020-9-20'):
     x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
     # creating the test data set
-    real_test_data = close_last_two_years_df[training_data_len : ]
+    real_test_data = close_df[training_data_len : ]
     test_data = data[training_data_len - 60:, :]
     x_test = []
     y_test = data[training_data_len:, :]
@@ -57,6 +57,6 @@ def get_data(data_set='AAPL', start='2012-01-01', end='2020-9-20'):
     x_test = np.array(x_test)
     x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 
-    return df, x_train, y_train, x_test, y_test, training_data_len, close_last_two_years_df, real_test_data
+    return df, x_train, y_train, x_test, y_test, training_data_len, close_df, real_test_data, test_data
 
 

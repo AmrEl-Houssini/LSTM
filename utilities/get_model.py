@@ -8,7 +8,7 @@ from keras.optimizers import SGD
 
 
 def get_model(x_train, first_layer_units=40, second_layer_units=40, thirds_layer_units=60,
-              dropout=0.2, loss='mean_squared_error', metrics='MAPE'):
+              dropout=0.2, loss='mean_squared_error', metrics='MAE'):
     model = Sequential()
     model.add(LSTM(units=first_layer_units, return_sequences=True, input_shape=(x_train.shape[1], 1)))
     model.add(Dropout(dropout))
