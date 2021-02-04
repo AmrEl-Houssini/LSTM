@@ -1,6 +1,7 @@
 from keras.models import Sequential
 from keras.layers import Dense, LSTM, Dropout
 from keras.optimizers import SGD
+from tensorflow_core.python.keras.api._v2 import keras
 
 
 def get_model(x_train, first_layer_units=40, second_layer_units=40, thirds_layer_units=60,
@@ -28,5 +29,8 @@ def get_model(x_train, first_layer_units=40, second_layer_units=40, thirds_layer
     model.add(Dropout(dropout))
     model.add(Dense(units=1))
 
-    model.compile(optimizer=SGD(lr=0.001), loss=loss, metrics=[metrics])
+    lr_dc = keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=0.001, decay_steps=10000, decay_rate=0.6)
+    opt = keras.optimizers.Adam(learning_rate=lr_dc)
+
+    model.compile(optimizer=opt, loss=loss, metrics=[metrics])
     return model
