@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error
 
 def predict(model, x_test, y_test, training_data_len, close_df):
     """
-    Testing the model and validating it's predictions
+    Testing the model and validating its predictions
 
     Args:
         model -  pre-trained and compiled model
@@ -17,6 +17,7 @@ def predict(model, x_test, y_test, training_data_len, close_df):
     Returns:
         validation_df - a df contains the predicted prices and the real data
     """
+
     predictions = model.predict(x_test)
 
     # getting the real prediction values instead of the price change in each prediction....
