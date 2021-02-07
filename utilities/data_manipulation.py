@@ -1,6 +1,6 @@
 import math
 import pandas_datareader as pdr
-from utilities.visuals import plotting
+from .visuals import plotting
 import numpy as np
 
 
