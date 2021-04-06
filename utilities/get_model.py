@@ -1,14 +1,11 @@
 from keras.models import Sequential
 from keras.layers import Dense, LSTM, Dropout
-from keras.optimizers import SGD
 from tensorflow_core.python.keras.api._v2 import keras
 
 
-def get_model(x_train, units=None,
-              dropout=0.2, loss='mean_squared_error', metrics='MAE'):
+def get_model(x_train, units=None, dropout=0.2, loss='mean_squared_error', metrics='MAE'):
     """
     Building the LSTM architecture to have three LSTM layer and dense layer with 1 neuron as output layer
-
     Args:
         (np array) x_train - a 3D shaped array input to the model
         (list) units - number of units in each layer
@@ -28,9 +25,7 @@ def get_model(x_train, units=None,
     model.add(LSTM(units=units[2]))
     model.add(Dropout(dropout))
     model.add(Dense(units=1))
-
     lr_dc = keras.optimizers.schedules.ExponentialDecay(initial_learning_rate=0.001, decay_steps=10000, decay_rate=0.6)
     opt = keras.optimizers.Adam(learning_rate=lr_dc)
-
     model.compile(optimizer=opt, loss=loss, metrics=[metrics])
     return model

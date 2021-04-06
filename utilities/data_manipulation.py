@@ -4,9 +4,10 @@ from .visuals import plotting
 import numpy as np
 
 
-def get_data(data_set='AAPL', start='2012-01-01', end='2020-9-20', look_back=60):
+def get_data(data_set='AAPL', start='2014-01-01', end='2019-09-30', look_back=60):
     """
-    Getting the desired data from yahoo, then doing some data manipulation such as plotting, train-test-split and data
+    Getting the desired data from yahoo, then doing some data manipulation
+    such as plotting, train-test-split and data
     reshaping
 
     Args:

@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
 
 
 def predict(predictions, y_test, training_data_len, close_df):
@@ -31,6 +32,9 @@ def predict(predictions, y_test, training_data_len, close_df):
     # Calculate/Get the value of MSE
     mse = mean_squared_error(predictions, y_test)
     print("MSE value:", mse)
+    # Calculate/Get the value of MAE
+    mae = mean_absolute_error(predictions, y_test)
+    print("MAE value:", mae)
 
     # creating a new df to assign the predictions to its equivalent days and comparing them to the real data
     validation_df = pd.DataFrame(real_data_prediction, columns=["predictions"])
